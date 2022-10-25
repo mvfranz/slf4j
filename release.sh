@@ -7,7 +7,7 @@
 
 #mvn versions:set -DgenerateBackupPoms=false -DnewVersion=${VERSION_NUMBER} 
 
-MVN='/java/maven-3.5.2//bin/mvn'
+MVN="${MVN:-/java/maven-3.5.2//bin/mvn}"
 
 function checkExit(){
     if test "$?" != "0"; then

@@ -420,7 +420,7 @@ public final class LoggerFactory {
      *      logger name mismatch</a>
      */
     public static Logger getLogger() {
-        var callerClass = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass();
+        Class<?> callerClass = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass();
         return LoggerFactory.getLogger(callerClass);
     }
 
