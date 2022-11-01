@@ -28,13 +28,15 @@
   </licenses>
 
   <scm>
-    <url>https://github.com/qos-ch/slf4j</url>
-    <connection>scm:git:https://github.com/qos-ch/slf4j.git</connection>
+<!--    <url>https://github.com/qos-ch/slf4j</url>-->
+<!--    <connection>scm:git:https://github.com/qos-ch/slf4j.git</connection>-->
+    <developerConnection>scm:git:git@github.com:mvfranz/slf4j.git</developerConnection>
+    <tag>HEAD</tag>
   </scm>  
 
   <properties>
     <!-- yyyy-MM-dd'T'HH:mm:ss'Z' -->
-    <project.build.outputTimestamp>2022-09-28T10:14:00Z</project.build.outputTimestamp>    
+    <project.build.outputTimestamp>2022-09-28T10:14:00Z</project.build.outputTimestamp>
     <latest.stable.version>1.7.36</latest.stable.version>
     <latest.2.version>2.0.0-alpha7</latest.2.version>    
     <!-- java.util.ServiceLoader requires Java 6 -->
@@ -60,6 +62,7 @@
     <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
     <maven-jxr-plugin.version>3.1.1</maven-jxr-plugin.version>
     <build-helper-maven-plugin.version>3.2.0</build-helper-maven-plugin.version>
+    <maven-release-plugin.version>3.0.0-M6</maven-release-plugin.version>
             
   </properties>
 
@@ -178,6 +181,12 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-deploy-plugin</artifactId>
           <version>${maven-deploy-plugin.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${maven-release-plugin.version}</version>
         </plugin>
 
       </plugins>
@@ -307,6 +316,20 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
         <version>3.0.0</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>${maven-release-plugin.version}</version>
+        <configuration>
+          <tagNameFormat>v_@{project.version}</tagNameFormat>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <!--
+            During release:perform, enable the "release" profile
+           -->
+          <releaseProfiles>release</releaseProfiles>
+        </configuration>
       </plugin>
     </plugins>
   
@@ -491,6 +514,9 @@
       </build>
     </profile>
     -->
+    <profile>
+      <id>release</id>
+    </profile>
   </profiles>
 
   <pluginRepositories>
@@ -513,8 +539,10 @@
     <repository>
       <!--<id>pixie</id>-->
       <!--<url>scp://pixie.qos.ch/var/mvnrepo/</url>-->
-      <id>sonatype-nexus-staging</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+<!--      <id>sonatype-nexus-staging</id>-->
+<!--      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+      <id>mfranz.nexus.http</id>
+      <url>http://192.168.1.140:8081/repository/maven-releases/</url>
     </repository>
 
   </distributionManagement>
