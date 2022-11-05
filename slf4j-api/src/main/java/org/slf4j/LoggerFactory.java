@@ -420,8 +420,9 @@ public final class LoggerFactory {
      *      logger name mismatch</a>
      */
     public static Logger getLogger() {
-        Class<?> callerClass = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass();
-        return LoggerFactory.getLogger(callerClass);
+//        Class<?> callerClass = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass();
+//        return LoggerFactory.getLogger(callerClass);
+        return LoggerFactory.getLogger(Util.getCallingClass());
     }
 
     private static boolean nonMatchingClasses(Class<?> clazz, Class<?> autoComputedCallingClass) {
